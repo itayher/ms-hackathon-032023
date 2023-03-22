@@ -19,10 +19,10 @@ module.exports = async function (context, req) {
         const ai = await openai.createCompletion(params);
 
         console.log(ai.data);
-        const aiResult = (ai.data.choices[0].text.toLocaleLowerCase().indexOf("yes") > -1);
+        const aiResult = (ai.data.choices[0].text.toLocaleLowerCase().indexOf("1") > -1);
         const justification = aiResult ? "this is the offensive text: bla bla" : ""
         
-        let res = {"result": aiResult, "justification": justification};
+        let res = {"result": aiResult, "justification": justification, text: ai.data.choices[0].text};
 
         context.res = {
             // status: 200, /* Defaults to 200 */
